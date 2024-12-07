@@ -1,0 +1,376 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+ 
+}
+.title{
+  position: relative;
+  
+  left: 300px;
+}
+h1{
+  
+  font-size: 24px;
+}
+body {
+  height: 100vh; /* Hauteur de la fenêtre d'affichage */
+  display: flex;
+  overflow-y: scroll; /* Permet le défilement vertical */
+  flex-direction: column; /* Assure que le contenu s'étire verticalement */
+  scrollbar-width: none; /* Firefox: Masque la barre de défilement */
+}
+
+
+
+.dashboard-container {
+  flex: 1; /* Permet à la section de prendre tout l'espace disponible */
+  overflow-y: auto; /* Ajoute une barre de défilement verticale si le contenu dépasse */
+}
+
+.hidden {
+  display: none;
+}
+
+.dropdown-container {
+  position: relative;
+  display: flex;
+
+  flex-wrap: wrap;
+  top:10px;
+ 
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin: 2em 0;
+}
+.dropdown{
+  min-width: 10em;
+ 
+  position: relative;
+  margin: 2em;
+}
+.dropdown * {
+
+  box-sizing: border-box ;
+}
+.select{
+background: rgba(100,117,158,.5);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px rgba(100,117,158,.5) solid;
+  padding: 0.6em 2.5em;
+  cursor: pointer;
+  border-radius: 0.5em;
+  transition: background 0.3s;
+}
+.select-clicked {
+  border: 2px #26489a solid;
+  box-shadow: 0 0 0.8em #26489a ;
+  }
+.caret{
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top:6px solid  #fff;
+  transition: 0.3s ;
+}
+.select:hover{
+  background: rgba(183, 187, 197, 0.5);
+}
+.caret-rotate{
+transform: rotate(180deg);
+
+}
+.menu{
+
+  list-style: none;
+  padding: 0.2em 0.5em;
+  background:rgba(226, 228, 231, 0.5);
+  border: 1px #b6b9c2 solid ;
+  box-shadow: 0 0.5em 1em rgba(0,0,0,0.2);
+  border-radius: 0.5em;
+  color:black;
+  position: absolute;
+  top:3em;
+  left: 50%;
+  width: 100%;
+ transform: translateX(-50%);
+ opacity: 0;
+ visibility: hidden;
+ transition: opacity 0.2s ease;
+ z-index: 3;
+
+}
+.menu li {
+
+  padding: 0.7em 0.5em  ;
+  margin:0.3em 0 ;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+.menu li :hover{
+  background: rgba(231, 233, 236, 0.5);
+
+}
+.active{
+
+  background: #fff;
+
+}
+.menu-open{
+  visibility: visible; 
+  opacity: 1;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+ input{
+  position: relative;
+  background: linear-gradient( 45deg, #83abcb,#96a4f3);
+  width:150px ;
+  height:40px ;
+  padding:20px ;
+  border: 0;
+  border-radius: 10px;
+  outline: none;
+ font-size: 15px;
+ font-weight: 400;
+ color: #fff;
+ letter-spacing:3px ;
+ text-transform: uppercase;
+ margin: 1rem;
+}
+input[type="date"]::placeholder {
+  color: #aaa; /* Couleur grise pour le placeholder */
+}
+
+/* Focus sur l'input pour un effet visuel lors de la sélection */
+input[type="date"]:focus {
+  border-color: #66afe9; /* Couleur de bordure lors du focus */
+  outline: none; /* Supprime l'effet d'outline par défaut */
+  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6); /* Ombre légère pour indiquer le focus */
+}
+
+/* Modification des éléments du calendrier */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inversion des couleurs du bouton de calendrier */
+}
+
+
+label{
+
+ background: rgba(100,117,158,.5);
+  color:#fff;
+  position: relative;
+  border-radius: 0.5em;
+  padding: 0.5em 0.8em;
+ 
+ margin: 0 1rem 0 0;
+}
+
+
+
+
+
+  
+  .chart-container {
+    width: 100%;
+    position: relative;
+    height: 400px;
+    
+    margin-left: 20px;
+    max-width: 1200px; /* Ajustez selon vos besoins */
+    margin: 0 auto; /* Centrer le graphique */
+    padding: 20px; /* Ajouter un peu d'espace autour du graphique */
+    background-color: #f9f9f9; /* Couleur de fond légère */
+    border-radius: 8px; /* Coins arrondis pour un effet plus moderne */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour plus de profondeur */
+  }
+  
+  /* Style pour le titre du graphique */
+  .apexcharts-title {
+    font-size: 18px; /* Taille de la police */
+    font-weight: 600; /* Poids de la police */
+    color: #333; /* Couleur du texte */
+    margin-bottom: 20px; /* Espacement sous le titre */
+  }
+  
+  /* Style pour les axes du graphique */
+  .apexcharts-xaxis, .apexcharts-yaxis {
+    position: relative;
+    left: 20px;
+    color: #555; /* Couleur du texte des axes */
+    font-size: 10px; /* Taille de la police des axes */
+  }
+  
+  /* Style pour les légendes du graphique */
+  .apexcharts-legend {
+    font-size: 14px; /* Taille de la police des légendes */
+    color: #333; /* Couleur du texte des légendes */
+    margin-top: 20px; /* Espacement au-dessus des légendes */
+  }
+  
+  /* Style pour les tooltips (info-bulles) du graphique */
+  .apexcharts-tooltip {
+    background: #333; /* Couleur de fond du tooltip */
+    color: #fff; /* Couleur du texte du tooltip */
+    font-size: 12px; /* Taille de la police du tooltip */
+    border-radius: 4px; /* Coins arrondis du tooltip */
+    padding: 8px; /* Espacement interne du tooltip */
+  }
+  
+  /* Style pour les points de données du graphique */
+  .apexcharts-datalabels {
+    font-size: 12px; /* Taille de la police des labels de données */
+    color: #fff; /* Couleur du texte des labels de données */
+  }
+  @media (max-width: 786px) {
+    /* Général */
+    body {
+      overflow-y: auto; /* Assure le défilement vertical */
+    }
+     h1{
+      font-size: 18px;
+     }
+     .title{
+      left: 50px;
+     }
+    .dropdown-container {
+      top: 80px; /* Ajustement pour éviter les chevauchements */
+      left: 0; /* Ajustement de la position horizontale */
+      justify-content: flex-start; /* Alignement à gauche */
+      gap: 1em; /* Espacement réduit */
+    }
+  
+    .dropdown {
+      margin: 1em; /* Réduction des marges */
+      min-width: 90%; /* Utilisation de la majorité de la largeur disponible */
+    }
+  
+    .select {
+      padding: 0.5em 1.5em; /* Ajustement du padding */
+      font-size: 14px; /* Réduction de la taille de la police */
+    }
+  
+    .input {
+      width: 50%; /* Utilisation de toute la largeur disponible */
+      padding: 12px; /* Ajustement du padding */
+      font-size: 12px; 
+      margin: 1rem;/* Ajustement de la taille de la police */
+    }
+  
+    label {
+      left: 1rem; /* Ajustement de la position horizontale */
+      padding: 0.5em;
+    }
+  
+    .chart-container {
+      top:50px;
+      height: 350px; /* Ajustement de la hauteur pour les écrans moyens */
+      padding: 15px; /* Réduction du padding */
+      margin-left: 0; /* Réduction de la marge gauche */
+    }
+  
+    .apexcharts-title {
+      font-size: 18px; /* Taille de la police ajustée */
+    }
+  
+    .apexcharts-xaxis, .apexcharts-yaxis {
+      font-size: 10px; /* Réduction de la taille de la police des axes */
+      left: 15px; /* Ajustement de la position horizontale */
+    }
+  
+    .apexcharts-legend {
+      font-size: 14px; /* Ajustement de la taille de la police des légendes */
+    }
+  
+    .apexcharts-tooltip {
+      font-size: 12px; /* Réduction de la taille de la police des tooltips */
+      padding: 8px; /* Ajustement du padding */
+    }
+  
+    .apexcharts-datalabels {
+      font-size: 12px; /* Ajustement de la taille de la police des labels de données */
+    }
+  }
+
+
+  @media (max-width: 480px) {
+    /* Général */
+    body {
+      overflow-y: auto; /* Assure le défilement vertical */
+    }
+  
+    .dropdown-container {
+      top: 50px; /* Ajustement pour éviter les chevauchements */
+      left: 0; /* Ajustement de la position horizontale */
+      gap: 0.5em; /* Réduction de l'écart entre les éléments */
+    }
+  
+    .dropdown {
+      margin: 1em; /* Réduction des marges */
+       
+    }
+  
+    .select {
+      padding: 0.5em 1em; /* Réduction du padding */
+      font-size: 14px; /* Réduction de la taille de la police */
+    }
+  
+    .input {
+      width: 40%; /* Utilisation de toute la largeur disponible */
+      padding: 10px; /* Réduction du padding */
+      font-size: 14px;
+      margin: 1rem; /* Réduction de la taille de la police */
+    }
+  
+    label {
+      left: 1rem; /* Ajustement de la position horizontale */
+      padding: 0.5em;
+    }
+  
+    .chart-container {
+      height: 300px; /* Réduction de la hauteur pour les petits écrans */
+      padding: 10px; /* Réduction du padding */
+      margin-left: 0; /* Réduction de la marge gauche */
+    }
+  
+    .apexcharts-title {
+      font-size: 16px; /* Réduction de la taille de la police */
+    }
+  
+    .apexcharts-xaxis, .apexcharts-yaxis {
+      font-size: 8px; /* Réduction de la taille de la police des axes */
+      left: 10px; /* Ajustement de la position horizontale */
+    }
+  
+    .apexcharts-legend {
+      font-size: 12px; /* Réduction de la taille de la police des légendes */
+    }
+  
+    .apexcharts-tooltip {
+      font-size: 10px; /* Réduction de la taille de la police des tooltips */
+      padding: 6px; /* Réduction du padding */
+    }
+  
+    .apexcharts-datalabels {
+      font-size: 10px; /* Réduction de la taille de la police des labels de données */
+    }
+  }

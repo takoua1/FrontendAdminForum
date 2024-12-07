@@ -5,14 +5,14 @@
   "projects": {
     "AdminForum": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": { },
       "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+      "sourceRoot": "src",      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+           
             "outputPath": "dist/admin-forum",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -29,7 +29,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [ 
+               "node_modules/apexcharts/dist/apexcharts.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -56,6 +58,11 @@
           "defaultConfiguration": "production"
         },
         "serve": {
+          "options": {
+      "proxyConfig": "proxy.config.json",
+      "port": 4300
+
+    },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
@@ -82,6 +89,7 @@
               {
                 "glob": "**/*",
                 "input": "public"
+                 
               }
             ],
             "styles": [
@@ -92,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "249eb4f5-94d6-46ba-997d-05ea87ffe165"
   }
 }

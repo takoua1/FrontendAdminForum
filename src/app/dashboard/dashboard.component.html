@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Poppins" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link  href='/src/app/dashboard/dashboard.component.css'  >
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<!--div class="dropdown">
+  <div class="select" >
+    <span class="selected" for="period">Année</span>
+    <div class="caret"></div>
+  </div>
+  <ul class="menu" id="period" >
+    <!li value="day" (click)="onPeriodChange('day')">Jour</li>
+    <li value="week" (click)="onPeriodChange('week')">Semaine</li>
+    <li value="month" (click)="onPeriodChange('month')">Mois</li>
+    <li value="year" (click)="onPeriodChange('year')" class="active">Année</li>
+  </ul>
+</div-->
+<!--div>
+  <label for="period">Choisissez la période :</label>
+  <select id="period" (change)="onPeriodChange($event)">
+    <option value="day">Jour</option>
+    <option value="week">Semaine</option>
+    <option value="month">Mois</option>
+    <option value="year">Année</option>
+  </select>
+</div-->
+<!--div class="dashboard-container">
+  <form>
+    <label for="periodSelect">Sélectionnez la période :</label>
+    <select id="periodSelect" (change)="onPeriodChange($event)">
+      <option value="year">Année</option>
+      <option value="month">Mois</option>
+      <option value="week">Semaine</option>
+      <option value="day">Jour</option>
+    </select-->
+  
+    <div class="dropdown-container">
+      <div class="dropdown dropdown-period">
+        <div class="select">
+          <span class="selected" for="period">Année</span>
+          <div class="caret"></div>
+        </div>
+        <ul class="menu" id="period">
+          <li value="day">Jour</li>
+          <li value="week">Semaine</li>
+          <li value="month">Mois</li>
+          <li value="year" class="active">Année</li>
+        </ul>
+      </div>
+  
+
+
+    <label for="startDate">Date De Début :</label>
+    <input type="date" id="startDate"  name="startDate" [(ngModel)]="startDate" (click)="fetchStatistics( startDate, endDate)">
+
+    <label for="endDate">Date De Fin :</label>
+    <input type="date" id="endDate"  name="endDate"  [(ngModel)]="endDate" (click)="fetchStatistics( startDate, endDate)">
+
+  
+  </div>
+   
+<div class="chart-widgets">
+  <div class="widgets-container">
+    <div class="widget widget-1">
+      <div class="widget-header">
+        <div class="info">
+          <p>Totale Postes</p>
+          <div class="total">{{totalPostes}}</div>
+        </div>
+      
+        <i class='bx bx-edit-alt'></i>
+      
+    </div >
+    <div class="chart-container">
+      <div id="chart1" >
+        <apx-chart [series]="chartPotes.series!" [chart]="chartPotes.chart!" 
+         [title]="chartPotes.title!" [colors]="chartPotes.colors!" [labels]="chartPotes.labels!"
+        [legend]="chartPotes.legend!"
+        [tooltip]="chartPotes.tooltip!"></apx-chart>
+      </div>
+    </div>
+  </div>
+  <div class="widget widget-2">
+    <div class="widget-header">
+      <div class="info">
+        <p>Totales Commentaires</p>
+        <div class="total">{{totalComments}}</div>
+       
+      </div>
+    
+      <i class='bx bx-comment' ></i>
+    
+  </div >
+  <div class="chart-container">
+    <div id="chart2" ></div>
+    <apx-chart [series]="chartComments.series!" [chart]="chartComments.chart!" 
+    [title]="chartComments.title!" [colors]="chartComments.colors!" [labels]="chartComments.labels!"
+   [legend]="chartComments.legend!"
+   [tooltip]="chartComments.tooltip!"></apx-chart>
+  </div>
+</div>
+<div class="widget widget-3">
+  <div class="widget-header">
+    <div class="info">
+      <p>Totales Groupes</p>
+      <div class="total">{{totalGroups}}</div>
+    </div>
+  
+    <i class='bx bx-group'></i>
+  
+</div >
+<div class="chart-container">
+  <div id="chart3"></div>
+  <apx-chart [series]="chartGroups.series!" [chart]="chartGroups.chart!" 
+  [title]="chartGroups.title!" [colors]="chartGroups.colors!" [labels]="chartGroups.labels!"
+ [legend]="chartGroups.legend!"
+ [tooltip]="chartGroups.tooltip!"></apx-chart>
+</div>
+</div>
+<div class="widget widget-4">
+  <div class="widget-header">
+    <div class="info">
+      <p>Totales User</p>
+      <div class="total">{{totalUsers}}</div>
+    </div>
+  
+    <i class='bx bx-user' ></i>
+  
+</div >
+<div class="chart-container">
+  <div id="chart4"></div>
+
+  <apx-chart
+  [series]="chartUsers.series!"
+  [chart]="chartUsers.chart!"
+  [xaxis]="chartUsers.xaxis!"
+  [yaxis]="chartUsers.yaxis!"
+  [dataLabels]="chartUsers.dataLabels!"
+  [stroke]="chartUsers.stroke!"
+  [title]="chartUsers.title!"
+  [grid]="chartUsers.grid!"
+  [fill]="chartUsers.fill!">
+</apx-chart>
+</div>
+</div>
+<div class="widget widget-5">
+  <div class="widget-header">
+    <div class="info">
+      <p>Totales User Active</p>
+      <div class="total">{{totalActif}}</div>
+    </div>
+  
+    <i class='bx bx-user-check' ></i>
+  
+</div >
+<div class="chart-container">
+  <div id="chart5"></div>
+    <apx-chart
+    [series]="chartUsersActif.series!" [chart]="chartUsersActif.chart!" 
+    [title]="chartUsersActif.title!" [colors]="chartUsersActif.colors!" [labels]="chartUsersActif.labels!"
+   [legend]="chartUsersActif.legend!"
+   [tooltip]="chartUsersActif.tooltip!">
+  </apx-chart>
+  
+</div>
+</div>
+
+</div>
+</div>
+<div style="text-align:center">
+
+</div>
+<div style="text-align:center">
+ 
+</div>
+</body>
+</html>

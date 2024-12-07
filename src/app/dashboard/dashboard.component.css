@@ -1,0 +1,310 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+
+
+/* Webkit Browsers */
+
+
+.dashboard-container {
+  flex: 1;
+  /* Permet à la section de prendre tout l'espace disponible */
+  overflow-y: auto;
+  /* Ajoute une barre de défilement verticale si le contenu dépasse */
+}
+
+.dropdown-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin: 2em 0;
+}
+
+.dropdown {
+  min-width: 10em;
+
+  position: relative;
+  margin: 2em;
+}
+
+.dropdown * {
+
+  box-sizing: border-box;
+}
+
+.select {
+  background: rgba(100, 117, 158, .5);
+  color: #fff;
+  display: flex;
+  width: 150px;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px rgba(100, 117, 158, .5) solid;
+  padding: 0.6em 2.5em;
+  cursor: pointer;
+  border-radius: 0.5em;
+  transition: background 0.3s;
+}
+
+.select-clicked {
+  border: 2px #26489a solid;
+  box-shadow: 0 0 0.8em #26489a;
+}
+
+.caret {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #fff;
+  transition: 0.3s;
+}
+
+.select:hover {
+  background: rgba(183, 187, 197, 0.5);
+}
+
+.caret-rotate {
+  transform: rotate(180deg);
+
+}
+
+.menu {
+
+  list-style: none;
+  padding: 0.2em 0.5em;
+  background: rgba(226, 228, 231, 0.5);
+  border: 1px #b6b9c2 solid;
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+  border-radius: 0.5em;
+  color: black;
+  position: absolute;
+  top: 3em;
+  left: 50%;
+  width: 150px;
+  transform: translateX(-50%);
+  opacity: 0;
+  display: none;
+  transition: 0.2s;
+  z-index: 3;
+
+}
+
+.menu li {
+
+  padding: 0.7em 0.5em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.menu li :hover {
+  background: rgba(231, 233, 236, 0.5);
+
+}
+
+.active {
+
+  background: #fff;
+
+}
+
+.menu-open {
+  display: block;
+  opacity: 1;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+input {
+  position: relative;
+  background: linear-gradient(45deg, #83abcb, #96a4f3);
+  width: 150px;
+  height: 40px;
+  padding: 20px;
+  border: 0;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+input[type="date"]::placeholder {
+  color: #aaa;
+  /* Couleur grise pour le placeholder */
+}
+
+/* Focus sur l'input pour un effet visuel lors de la sélection */
+input[type="date"]:focus {
+  border-color: #66afe9;
+  /* Couleur de bordure lors du focus */
+  outline: none;
+  /* Supprime l'effet d'outline par défaut */
+  box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+  /* Ombre légère pour indiquer le focus */
+}
+
+/* Modification des éléments du calendrier */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  /* Inversion des couleurs du bouton de calendrier */
+}
+
+
+label {
+
+
+
+  /*  box-shadow: 0 0.5em 1em rgba(204, 201, 201, 0.963);
+  border-radius: 0.5em;*/
+
+  background: rgba(100, 117, 158, .5);
+  color: #fff;
+  position: relative;
+  border-radius: 0.5em;
+  padding: 0.5em 0.8em;
+
+
+
+
+}
+
+
+
+
+
+.chart-widgets {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.widgets-container {
+  padding: 2em;
+  min-height: 100vh;
+  margin: 0 auto;
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 1em
+}
+
+.chart-widgets::before {
+  content: "";
+  background-color: rgba(100, 117, 158, .5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  backdrop-filter: blur(17px);
+  z-index: 0;
+}
+
+.widget {
+  background-color: rgba(38, 44, 51, 0.5);
+  border-radius: 1em;
+
+  height: 500px;
+  position: relative;
+  z-index: 1;
+}
+
+.widget-1 {
+  overflow: hidden;
+}
+
+.widget-header {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 1em 0 1em;
+}
+
+.widget p {
+  font-size: 1.2em;
+}
+
+.widget i {
+  font-size: 1.5em;
+}
+
+.widget-header .info .total {
+  font-size: 1.5em;
+}
+
+apx-chart {
+  max-width: 800px;
+  margin: 50px auto;
+}
+.widget-4{
+
+  width: 600px;
+}
+
+@media (max-width: 768px) {
+  .dropdown-container {
+    flex-direction: column;
+  }
+  
+  .dropdown {
+    margin: 1em;
+    min-width: 100%;
+  }
+  .select {
+    margin-left: calc(50% - 4.5rem); /* Centrer et garder la stabilité */
+  }
+  .widget {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .chart-widgets {
+    background-size: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  .widget-header {
+    padding: 0.5em;
+  }
+
+  .widget p {
+    font-size: 1em;
+  }
+
+  .widget i {
+    font-size: 1.2em;
+  }
+  .select {
+    margin-left: calc(50% - 4.5rem); /* Ajuster en fonction de l'écran plus petit */
+  }
+
+  .input {
+    width: auto;
+    padding: 15px;
+    font-size: 14px;
+  }
+}

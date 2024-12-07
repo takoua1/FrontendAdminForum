@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href='/app/sidenav/sidenav.component.css'>
+</head>
+
+<body>
+
+
+<div class="sidenav" [ngClass]="collapsed ? 'sidenav-collapsed':''">
+<div class="logo-container">
+<button class="logo" (click)="toggleColapse()">
+    ADMIN
+</button>
+<div class="logo-text"  @fadeIn *ngIf="collapsed"  >FORUM</div>
+<button class="btn-close" @rotate *ngIf="collapsed" (click)="closeSidernav()" >
+
+ <i class='bx bx-x'></i>
+</button>
+
+
+</div>
+
+
+<ul class="sidenav-nav">
+<li class="sidenav-nav-item" *ngFor="let data of navData">
+    <a  class="sidenav-nav-link" *ngIf="data.items && data.items.length > 0" (click)="handleClick(data)">
+    <i class="sidenav-link-icon" [class]="data.icon"></i>
+    <span class="sidenav-link-text" @fadeIn *ngIf="collapsed">{{data.label}}</span>
+    <i *ngIf="data.items && collapsed" class="menu-collapse-icon" [ngClass]= "!data.expanded ? 'bx bx-right-arrow' :'bx bx-down-arrow'"></i>
+</a>
+
+  <a  class="sidenav-nav-link" *ngIf="!data.items || (data.items && data.items.length===0)" [routerLink]="[data.routeLink]"
+  routerLinkActive="active"[routerLinkActiveOptions]="{exact:true}">
+  <i class="sidenav-link-icon" [class]="data.icon"></i>
+  <span class="sidenav-link-text" @fadeIn *ngIf="collapsed">{{data.label}}</span>
+  <span *ngIf="data.label === 'Signale' && unTraitesCount > 0" class="badge">{{ unTraitesCount >= 100 ? '+100' : unTraitesCount}}</span>
+</a>
+<div *ngIf="collapsed && data.items && data.items.length >0 ">
+  <app-sublevel-menu [data]="data" [collapsed]="collapsed" [multiple]="multiple" [expanded]="data.expanded"></app-sublevel-menu>
+</div>
+
+</li>
+<li class="sidenav-nav-item">
+  <a  class="sidenav-nav-link" (click)="logOut()">
+    <i class=' bx bx-log-out sidenav-link-icon'></i>
+    <span class="sidenav-link-text" @fadeIn *ngIf="collapsed">Déconncter</span>
+</a>
+</li>
+</ul>
+
+</div>
+</body>
+</html>

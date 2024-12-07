@@ -1,0 +1,442 @@
+
+*{  
+  margin: 0;
+  padding: 0;
+  
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+ 
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.search-filter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.search-container {
+  position: relative;
+  width: 30%;
+}
+
+.search {
+  width: 100%;
+  border: none;
+  height: 2.375rem;
+  padding-left: 2.5rem;
+  padding-right: 1.25rem;
+  background-color: #f3f3f3;
+  box-shadow: none;
+  border-radius: 1.875rem;
+  outline: 0;
+}
+
+.search-icon {
+  position: absolute;
+  font-size: 1rem;
+  line-height: 2.375rem;
+  left: 0.813rem;
+  top: 0;
+  color: #74788d;
+}
+
+
+.table {
+  width: 94%;
+  margin: 3rem 0 3rem 0rem;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: .8rem;
+  border-collapse: collapse;
+}
+
+.table h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #f4f4f4;
+}
+
+th, td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.user {
+ 
+  align-items: center;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+th {
+  background-color: #000000;
+  color: white;
+}
+
+td {
+  font-size: 16px;
+}
+.actions {
+
+  gap: 1rem; 
+}
+
+.btn {
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 1rem;
+  width:6rem;
+}
+
+.delete-btn {
+  background-color: #f44336; /* Rouge pour la suppression */
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+.block-btn {
+  background-color: #ff9800; /* Orange pour le blocage */
+}
+
+.block-btn:hover {
+  background-color: #f57c00;
+}
+.unblock-btn
+{  background-color: #3cff00;}
+.unblock-btn:hover{
+
+  background-color:#3af700;
+}
+.signale-btn
+{
+  background-color: #017ffd; 
+}
+.signale-btn:hover{
+  background-color: #025bf5; 
+}
+.pagination-controls .pagination-prev {
+  content: "Précédent";
+}
+
+.pagination-controls .pagination-next {
+  content: "Suivant";
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 60px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none; /* Hide by default */
+  align-items: center;
+  justify-content: center;
+}
+
+.popup.show {
+  display: flex; /* Show when class 'show' is added */
+}
+
+.popup-content-signale {
+  background: #fff;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  padding: 20px;
+  position: relative;
+}
+
+.popup-title-signale {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.popup-body-signale {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.signale-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.signale-table th, .signale-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.signale-table th {
+  background-color: #070000;
+}
+
+.btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.details-btn {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.details-btn:hover {
+  background-color: #0056b3;
+}
+
+.action-btn {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.action-btn:hover {
+  background-color: #c82333;
+}
+
+.popup-content {
+  background-color: #ffffff;
+  top:-30px;
+  padding: 20px;
+  border-radius: 12px;
+  width: 450px;
+  max-width: 90%;
+ 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  text-align: left;
+  position: relative;
+  animation: fadeInn 0.4s ease;
+}
+
+/* Animation d’apparition */
+@keyframes fadeInn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+.popup-title {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.popup-body {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #555;
+}
+.popup-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.popup-body::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.popup-body::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.popup-body::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+
+.enabled-post {
+  color: green;
+}
+
+
+/* Classe pour un post désactivé (texte rouge) */
+.disabled-post {
+  color: red;
+}
+.unblock_user{
+  color: green;
+}
+.block_user{
+  color: red;
+}
+.post-image {
+  display: block;
+  max-width: 40%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* Ajustements pour les écrans de 768 pixels */
+@media (max-width: 768px) {
+  .head-content {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.head-content-left .search-container {
+    width: 100%;
+}
+
+.search {
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.btn {
+    padding: 8px 15px;
+    font-size: 12px;
+    width: auto; /* Adaptation pour les petits écrans */
+}
+
+.user-avatar {
+    width: 30px;
+    height: 30px;
+}
+  .popup-content {
+      width: 60%; /* Réduction de la largeur pour s'adapter aux écrans plus petits */
+      max-width: 90%;
+      padding: 15px; /* Réduction du padding */
+  }
+
+  .popup-title {
+      font-size: 18px; /* Réduction de la taille du titre */
+  }
+
+  .popup-body {
+      font-size: 14px; /* Réduction de la taille du texte */
+  }
+  .popup-content-signale {
+    width: 60%; /* Réduction de la largeur pour s'adapter aux écrans plus petits */
+    max-width: 90%;
+    padding: 15px; /* Réduction du padding */
+  }
+
+  .popup-title-signale {
+    font-size: 1.2rem; /* Réduction de la taille du titre */
+  }
+
+  .popup-body-signale {
+    font-size: 14px; /* Réduction de la taille du texte */
+  }
+}
+
+/* Ajustements pour les écrans de 480 pixels */
+@media (max-width: 480px) {
+
+  .head-content {
+    padding: 0.5rem;
+}
+
+.search {
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+}
+
+.table {
+    margin: 1rem 0;
+    padding: 0.5rem;
+}
+
+.btn {
+    padding: 6px 10px;
+    font-size: 10px;
+}
+
+.user-avatar {
+    width: 25px;
+    height: 25px;
+}
+.popup-content-signale {
+  width: 60%; /* Réduction de la largeur pour s'adapter aux écrans plus petits */
+  max-width: 90%;
+  padding: 15px; /* Réduction du padding */
+}
+
+.popup-title-signale {
+  font-size: 1.2rem; /* Réduction de la taille du titre */
+}
+
+.popup-body-signale {
+  font-size: 14px; /* Réduction de la taille du texte */
+}
+  .popup-content {
+      width: 60%; /* Utilisation de toute la largeur disponible */
+      padding: 10px; /* Réduction supplémentaire du padding */
+      border-radius: 8px; /* Légère réduction du rayon des bords */
+  }
+
+  .popup-title {
+      font-size: 16px; /* Taille du titre encore réduite pour les petits écrans */
+  }
+
+  .popup-body {
+      font-size: 12px; /* Taille du texte encore réduite */
+  }
+
+  .close-btn {
+      font-size: 1.2rem; /* Ajustement de la taille du bouton de fermeture */
+      top: 5px; /* Réduction de l'espacement supérieur */
+      right: 5px; /* Réduction de l'espacement droit */
+  }
+}

@@ -1,0 +1,69 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"  href="https://fonts.googleapis.com/css?family=Poppins" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link  href='/src/app/comments/comments.component.css'  >
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="title">
+        <h1>Statistique de commentaire</h1>
+    </div>
+<div class="dropdown-container">
+   
+  <div class="date-picker">
+    <label for="date">Sélectionner une date :</label>
+    <input type="date" id="date" name="selectedDate" [(ngModel)]="selectedDate"  (change)="onDateChange($event)" />
+  </div>
+    <div class="dropdown dropdown-period"  (click)="toggleMenu()">
+      <div class="select" (click)="initDropdowns()">
+        <span class="selected" for="period">Jour</span>
+        <div class="caret"></div>
+      </div>
+      <ul class="menu" id="period"  [@menuAnimation]="menuState">
+        <li [ngClass]="{'hidden': !menuDay}" (click)="onPeriodChange('day')" value='day' [class.active]="selectedPeriod === 'day'">Jour</li>
+        <li [ngClass]="{'hidden': !menuWeek}" (click)="onPeriodChange('week')" value='week' [class.active]="selectedPeriod === 'week'">Semaine</li>
+        <li [ngClass]="{'hidden': !menuMonth}" (click)="onPeriodChange('month')" value='month' [class.active]="selectedPeriod === 'month'">Mois</li>
+        <li [ngClass]="{'hidden': !menuYear}" (click)="onPeriodChange('year')" value="'year'" [class.active]="selectedPeriod === 'year'">Année</li>
+      
+        
+      </ul>
+    </div>
+    
+    <div class="dropdown dropdown-category"  (click)="toggleMenuCateg()">
+      <div class="select" (click)="initDropdowns()">
+        <span class="selected" for="category">All</span>
+        <div class="caret"></div>
+      </div>
+      <ul class="menu" id="category" [@menuAnimation]="mnuCatg">
+        <li value="All">All</li>
+        <li value="Education">Education</li>
+        <li value="Jeux">Jeux</li>
+        <li value="Musique">Musique</li>
+        <li value="Politique">Politique</li>
+        <li value="Sport">Sport</li>
+      </ul>
+    </div>
+   
+  </div>
+  <div class="chart-container">
+    <apx-chart
+      [series]="chartPoste.series!"
+      [chart]="chartPoste.chart!"
+      [title]="chartPoste.title!"
+      [colors]="chartPoste.colors!"
+      [xaxis]="chartPoste.xaxis!"
+      [legend]="chartPoste.legend!"
+      [tooltip]="chartPoste.tooltip!">
+    </apx-chart>
+  </div>
+  
+    </body>
+    </html>
+ 
+
+

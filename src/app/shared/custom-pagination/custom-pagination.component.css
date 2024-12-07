@@ -1,0 +1,51 @@
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne suivante si nécessaire */
+  }
+  
+  /* Boutons de pagination */
+  .pagination-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px; /* Réduit les marges pour les écrans plus petits */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Transition douce pour les changements de couleur */
+  }
+  
+  /* Boutons désactivés */
+  .pagination-button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+  }
+  
+  /* Informations de pagination */
+  .pagination-info {
+    font-size: 16px;
+    margin: 5px 15px; /* Ajuste les marges pour plus de flexibilité */
+  }
+  
+  /* Styles spécifiques pour les écrans plus petits */
+  @media (max-width: 768px) {
+    .pagination-button {
+      padding: 8px 15px; /* Réduit le padding pour les écrans plus petits */
+      font-size: 14px; /* Réduit la taille de la police */
+    }
+  
+    .pagination-info {
+      font-size: 14px; /* Réduit la taille de la police pour les petits écrans */
+      margin: 5px 10px; /* Ajuste les marges pour plus de flexibilité */
+    }
+  }
+  
+  /* Styles pour les très petits écrans */
+  @media (max-width: 480px) {
+    .pagination-container {
+      flex-direction: column; /* Affiche les boutons de pagination en colonne pour les très petits écrans */
+    }}

@@ -1,0 +1,152 @@
+<div class="container">
+    <h1>Liste des Signalements</h1>
+    
+    <!-- Barre de recherche et filtres -->
+   
+    <div class="search-filter">
+        <div class="search-container">
+      <input type="search"  class="search" placeholder="Rechercher un signalement..."  [(ngModel)]="searchTerm"  (input)=" search(searchTerm)"/>
+
+      <i class='bx bx-search-alt-2 search-icon'></i>
+     
+    </div>
+    <div class="dropdown-container"></div>
+        <div class="dropdown dropdown-status">
+          <div class="select">
+            <span class="selected" for="status">Filtrer par statut</span>
+            <div class="caret"></div>
+          </div>
+         
+            <ul class="menu" id="status">
+              <li (click)="filterSignales('')">Filtrer par Statut</li>
+              <li (click)="filterSignales('en_attente')">En attente</li>
+              <li (click)="filterSignales('resolu')">Résolu</li>
+            
+          </ul>
+        </div>
+    
+    </div>
+ 
+    <table class="table-signale">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Utilisateur</th>
+          <th>titre</th>
+          <th>Raison</th>
+          <th>Description</th>
+          <th>Desicion</th>
+          <th>Date</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      
+        <tr *ngFor="let signale of filteredSignales | paginate: { itemsPerPage: 4, currentPage: page }">
+            <td>{{ signale.id }}</td>
+            <td>{{ signale.user.nom }} {{ signale.user.prenom }}</td>
+            <td>{{ signale.titre }}</td>
+            <td>{{ signale.raison }}</td>
+            <td>{{ signale.description}}</td>
+            <td>{{ signale.decision ? signale.decision : 'Aucune' }}</td>
+            <td>{{ signale.dateSignale | date:'dd/MM/yyyy HH:mm' }} </td>
+            <td *ngIf="signale.estTraite===false" >
+              <span class="status en-attente">En attente</span>
+              
+            </td>
+            <td *ngIf="signale.estTraite===true" >
+              <span class="status resolu">Etait résolu</span>
+            </td>
+            <td>
+                <button class="btn details"  (click)="openPopup(signale)">Voir détails</button>
+                <button class="btn resoudre" *ngIf="signale.estTraite===true" (click)="openDecisionPopup(signale)">Modifier</button>
+                <button class="btn supprimer" *ngIf="signale.estTraite===true"  (click)=" openDeletePopup(signale)">Supprimer</button>
+              </td>
+        </tr>
+       
+      </tbody>
+    </table>
+    <app-custom-pagination
+    [currentPage]="page"
+    [totalPages]="totalPages"
+    (pageChange)="page = $event">
+  </app-custom-pagination>
+  </div>
+  <div class="popup" [class.show]="isPopupVisible">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h3 class="popup-title">Détails du Signalement</h3>
+      <div class="popup-body" *ngIf="selectedPost">
+        <p  [ngClass]="{'unblock_user': selectedPost?.user.enabled, 'block_user': !selectedPost?.user.enabled}"><strong>Utilisateur :</strong> {{selectedPost?.user.username}}</p>
+        <p><strong>Message Signalé :</strong></p>
+        <div class="post-content" [ngClass]="{'enabled-post': selectedPost?.enabled, 'disabled-post': !selectedPost?.enabled}">
+          {{ selectedPost?.message }}
+          <img *ngIf="selectedPost?.image" [src]="selectedPost?.image" class="post-image" alt="Image du poste">
+        </div>
+      </div>
+      <div class="popup-body" *ngIf="selectedComment">
+        <p  [ngClass]="{'unblock_user': selectedComment?.user.enabled, 'block_user': !selectedComment?.user.enabled}"><strong>Utilisateur :</strong> {{selectedComment?.user.username}}</p>
+        <p><strong>Message Signalé :</strong></p>
+        <div class="post-content" [ngClass]="{'enabled-post': selectedComment?.enabled, 'disabled-post': !selectedComment?.enabled}">
+          {{ selectedComment?.text }}
+          
+        </div>
+      </div>
+      <div class="popup-footer">
+        <button class="action-btn" (click)="closePopup()">Fermer</button>
+        <!-- Bouton Décision -->
+        <div class="decision-dropdown">
+          <button class="action-btn decision-btn" (click)="toggleDecisionMenu()">Décision</button>
+          <!-- Menu déroulant -->
+          <ul class="dropdown-menu" *ngIf="isDecisionMenuVisible">
+            <li (click)="takeAction('supprimer')">Supprimer</li>
+            <li (click)="takeAction('bloquer')">Bloquer l'utilisateur</li>
+            <li (click)="takeAction('bloquer_supprimer')">Supprimer et Bloquer</li>
+            <li (click)="takeAction('ne_rien_faire')">Ne rien faire</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div class="popup" [class.show]="isDecisionPopupVisible">
+      <div class="popup-content">
+        <span class="close-btn" (click)="closeDecisionPopup()">&times;</span>
+        <h3 class="popup-title">Détails de la Décision</h3>
+        <div class="popup-body">
+          <p><strong>Administrateur :</strong> {{ decisionDetails?.admin.username }}</p>
+
+          <p><strong>Date de la Décision :</strong> {{ decisionDetails?.dateDecision | date:'dd/MM/yyyy HH:mm' }}</p>
+          <p><strong>Décision :</strong> {{ decisionDetails?.decision}}</p>
+        </div>
+        <div class="popup-footer">
+          <button class="action-btn" (click)="closeDecisionPopup()">Fermer</button>
+          <div class="decision-dropdown">
+            <button class="action-btn modifier-btn" (click)="toggleDecisionMenu()">Modifier</button>
+            <!-- Menu déroulant -->
+            <ul class="dropdown-menu" *ngIf="isDecisionMenuVisible">
+              <li (click)="takeActionUpdate('supprimer')">Supprimer</li>
+              <li (click)="takeActionUpdate('bloquer')">Bloquer l'utilisateur</li>
+              <li (click)="takeActionUpdate('bloquer_supprimer')">Supprimer et Bloquer</li>
+              <li (click)="takeActionUpdate('ne_rien_faire')">Ne rien faire</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popup" [class.show]="isVisible">
+      <div class="popup-content">
+        <span class="close-btn" (click)="onCancel()">&times;</span>
+        <h3 class="popup-title">Confirmation de Suppression</h3>
+        <div class="popup-body">
+        <p>Êtes-vous sûr de vouloir supprimer ce signale ?</p>
+        <div class="popup-footer">
+          
+        <button class="action-btn conf-btn" (click)="onConfirm()">Confirmer</button>
+        <button class="action-btn " (click)="onCancel()">Annuler</button>
+      </div>
+    </div>
+      </div>
+    </div>

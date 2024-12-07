@@ -1,0 +1,128 @@
+
+<div class="container">
+  <h1>Liste des Membres</h1>
+    
+  <!-- Barre de recherche et filtres -->
+ 
+  <div class="search-filter">
+    <div class="search-container">
+  <input type="search"  class="search" placeholder="Rechercher un signalement..."  [(ngModel)]="searchTerm"  (input)=" search(searchTerm)"/>
+
+  <i class='bx bx-search-alt-2 search-icon'></i>
+ 
+</div>
+  </div>
+
+   
+  
+    <table width=100% class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom d'Utilisateur</th>
+          <th>Email</th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Pays</th>
+          <th>Date de Inscription</th>
+          <th>Actions</th>
+          <th>Signales</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers | paginate: { itemsPerPage: 4, currentPage: page }" >
+            <td>{{ user.id }}</td>
+            <td class="user"><img [src]="user.image ? user.image : '/image/user.png'" class="user-avatar">
+                {{ user.username }}</td>
+         
+         
+          <td>{{ user.email }}</td>
+          <td>{{ user.nom }}</td>
+          <td>{{ user.prenom }}</td>
+          <td>{{user.pays}}</td>
+          <td>{{user.dateAuthenticated}}</td>
+          <td class="actions"> <!-- Nouvelle cellule pour les actions -->
+            <button (click)="deleteUser(user.id)" class="btn delete-btn">Supprimer</button>
+            <button (click)="blockUser(user.id)" class="btn block-btn" *ngIf="user.enabled===true">Bloquer</button>
+            <button (click)="unblockUser(user.id)" class="btn unblock-btn" *ngIf="user.enabled===false">Débloquer</button>
+          </td>
+          <td >
+            <button *ngIf="userSignaleStatus[user.id]" (click)="openSignaleDetails(user)" class="btn signale-btn">Voir les Signales</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-custom-pagination
+    [currentPage]="page"
+    [totalPages]="totalPages"
+    (pageChange)="page = $event">
+  </app-custom-pagination>
+
+
+    
+</div>
+<div class="popup" [class.show]="isSignalePopupVisible">
+  <div class="popup-content-signale">
+    <span class="close-btn" (click)="closeSignalePopup()">&times;</span>
+    <h3 class="popup-title-signale">Détails des Signalements</h3>
+    <div class="popup-body-signale">
+      <table class="signale-table" width="100%">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Raison</th>
+            <th>Description</th>
+            <th>Date De Signale</th>
+            <th>Décision</th>
+            <th>Admin</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let signale of signales | paginate: { itemsPerPage: 2, currentPage: pageSignale }">
+            <td>{{ signale.id }}</td>
+            <td>{{ signale.raison }}</td>
+            <td>{{ signale.description }}</td>
+            <td>{{ signale.dateSignale | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ signale.decision ? signale.decision : 'Aucune' }}</td>
+            <td>{{ signale.admin ? signale.admin.username : 'Non défini' }}</td>
+            <td>
+              <!-- Boutons pour voir plus de détails si nécessaire -->
+              <button class="btn details-btn" (click)="openDetailPopup(signale)">Voir Détails</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <app-custom-pagination
+[currentPage]="pageSignale"
+[totalPages]="totalPagesSignale"
+(pageChange)="pageSignale = $event">
+</app-custom-pagination>
+    </div>
+    
+  </div>
+</div>
+<div class="popup" [class.show]="isDetailPopupVisible">
+  <div class="popup-content">
+    <span class="close-btn" (click)="closeDetailPopup()">&times;</span>
+    <h3 class="popup-title" *ngIf="selectedPost">Détail du Post Signalé</h3>
+    <div class="popup-body" *ngIf="selectedPost">
+      <p  [ngClass]="{'unblock_user': selectedPost?.user.enabled, 'block_user': !selectedPost?.user.enabled}"><strong>Utilisateur :</strong> {{selectedPost?.user.username}}</p>
+      <p><strong>Message Signalé :</strong></p>
+      <div class="post-content" [ngClass]="{'enabled-post': selectedPost?.enabled, 'disabled-post': !selectedPost?.enabled}">
+        {{ selectedPost?.message }}
+        <img *ngIf="selectedPost?.image" [src]="selectedPost?.image" class="post-image" alt="Image du poste">
+      </div>
+    </div>
+    <h3 class="popup-title" *ngIf="selectedComment">Détail du Commentaire Signalé</h3>
+    <div class="popup-body" *ngIf="selectedComment">
+      <p  [ngClass]="{'unblock_user': selectedComment?.user.enabled, 'block_user': !selectedComment?.user.enabled}"><strong>Utilisateur :</strong> {{selectedComment?.user.username}}</p>
+      <p><strong>Message Signalé :</strong></p>
+      <div class="post-content" [ngClass]="{'enabled-post': selectedComment?.enabled, 'disabled-post': !selectedComment?.enabled}">
+        {{ selectedComment?.text }}
+        
+      </div>
+    </div>
+   
+  </div>
+  </div>
